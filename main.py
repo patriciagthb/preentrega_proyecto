@@ -1,9 +1,5 @@
-lista_productos = [["nombre", "categoría", "precio"], ["a","B",10],["taza","vajilla", 10], ["plato", "vajilla", 30],["taza", "desayuno", 10]]
 
-
-#lista_productos =[]
-
-
+lista_productos =[]
 
 while True:
 
@@ -18,11 +14,11 @@ while True:
   if opcion.isdigit():
     opcion = int(opcion)
   else:
-    print("Entrada inválida, por favor ingrese un número") #falta mje si el numero es mayor a 5
+    print("Entrada inválida, por favor ingrese un número") 
     continue
 
   match opcion:
-    case 1: #Agrega productos
+    case 1: 
       while True:
         while True:
           nombre_producto = input("Ingrese el nombre del producto: ").strip().lower()
@@ -57,7 +53,7 @@ while True:
         lista_productos.append([nombre_producto, categoria_producto, precio_producto])
         print(f"Se ha agregado el producto '{nombre_producto.capitalize()}' en la categoria '{categoria_producto.capitalize()}' con el precio $ {precio_producto}")
 
-        #prueba salida
+        
         while True:
           respuesta = input("Desea agregar otro producto? s / n : ").strip().lower()
 
@@ -70,7 +66,6 @@ while True:
         if respuesta == "n":
             break
 
-
     case 2:
       if len(lista_productos) == 0:
         print("No hay productos en la lista.")
@@ -78,7 +73,6 @@ while True:
         lista_productos.sort()
         for indice in range(len(lista_productos)):
           print(f"{indice+1}. \t{lista_productos[indice][0]}\t{lista_productos[indice][1]}\t{lista_productos[indice][2]}")
-
 
     case 3:
       producto_buscado = input("Ingrese el nombre del producto que desea buscar: ").strip().lower()
@@ -88,36 +82,41 @@ while True:
         if producto[0] == producto_buscado:
           productos_encontrados.append(producto)
 
-
       if productos_encontrados:
         print(f"Se han encontrado los siguientes productos: {productos_encontrados}\n")
 
       else:
         print(f"El producto buscado no se encuentra en la lista\n")
 
-
-
-    #Eliminar productos
+    
     case 4:
       if len(lista_productos) == 0:
         print("No hay productos en la lista")
 
       else:
+        lista_productos.sort()
         for indice in range(len(lista_productos)):
           print(f"{indice+1}. \t{lista_productos[indice][0]}\t{lista_productos[indice][1]}\t{lista_productos[indice][2]}")
 
-        producto_a_eliminar = input("Ingrese el número de orden en el que se encuentra el producto a eliminar: ").strip()
-        if producto_a_eliminar.isdigit():
-          int(producto_a_eliminar)
-        else:
-          print("Entrada inválida.")
+        while True:
 
-        #falta validacion numero
-        #respuesta si se ingresa un numero fuera de rango , evitar el error
-        #corregir error cuando se ingresa una palabra
+          producto_a_eliminar = input("Ingrese el número de orden en el que se encuentra el producto a eliminar(0 para salir): ").strip()
+          if producto_a_eliminar == "0":
+            print("Volviendo al menu. ")
+            break
 
-        producto_eliminado = lista_productos.pop(int(producto_a_eliminar)-1)
-        print(f"Se ha eliminado el producto {producto_eliminado}")
+          if producto_a_eliminar.isdigit():
+            producto_a_eliminar = int(producto_a_eliminar)
+
+            if len(lista_productos) < producto_a_eliminar:
+              print("La opcion ingresada no existe ")
+              break
+
+            else:
+              print(f"Se ha eliminado el producto '{lista_productos[producto_a_eliminar -1][0].capitalize()}'")
+              del lista_productos[producto_a_eliminar -1]
+              break                         
+
 
 
     case 5:
@@ -125,10 +124,6 @@ while True:
       break
 
     case _n:
-      print("La opcion ingresada no es válida (desde el nro 1 al nr 5)")
-
-
-
-
+      print("La opcion ingresada no es válida (Ingrese un número desde el nro 1 al nro 5)")
 
 
